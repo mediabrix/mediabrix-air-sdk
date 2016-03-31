@@ -127,6 +127,10 @@ package
 			}
 		}
 		
+		public function onAdShown(zone:String):void{
+			log(zone + ":onAdShown");
+		}
+		
 		public function onAdClosed(zone:String):void{
 			if(rewardViews == true && zone == adZoneViews){
 				log(zone + ":onAdClosed & Rewarded");
