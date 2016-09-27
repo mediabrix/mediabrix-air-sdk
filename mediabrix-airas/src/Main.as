@@ -25,53 +25,25 @@ package
 		private var mbAPI:MediabrixAirAPI = MediabrixAirAPI.instance;
 		private var mbVars:Object = new Object();
 		
-		
-		/*
-		private var baseURL : String = "http://mobile15.mediabrix.com/manifest/";
-		private var appID : String = "tAefPGlpJKPVtQGoEBpp";
-		
-		private var adZoneFlex : String = "Android_Flex";
-		private var isReadyFlex : Boolean = false;
-		
-		private var adZoneViews : String = "Android_Views";
-		private var isReadyViews : Boolean = false;
-		private var rewardViews : Boolean = false;
-		private var rewardViewsCount : int = 0;
-		
-		private var adZoneRewards : String = "Android_Rewards";
-		private var isReadyRewards : Boolean = false;
-		private var rewardRewards : Boolean = false;
-		private var rewardRewardsCount : int = 0;
-		*/
-		
-		private var baseURL : String = "http://mobile-us-we-tbliab.cloudapp.net/v2/manifest/";
-		
-		//private var baseURL : String = "http://mobile.mediabrix.com/v2/manifest/";
-		
-		//http://mobile.mediabrix.com/v2/manifest/
-		
+		private var baseURL : String = "http://mobile.mediabrix.com/v2/manifest/";
 		private var appID : String = "TwwvxoFnJn";
-	
-		//private var appID : String = "k4L77F6VrC";
 		
 		private var adZoneFlex : String = "Babel_Rally";
 		private var isReadyFlex : Boolean = false;
 		
 		private var adZoneViews : String = "Babel_Rescue";
-		//	private var adZoneViews : String = "smartclip";
 		private var isReadyViews : Boolean = false;
 		private var rewardViews : Boolean = false;
 		private var rewardViewsCount : int = 0;
 		
 		private var adZoneRewards : String = "Babel_Reward";
-		//private var adZoneRewards : String = "liverail";
 		private var isReadyRewards : Boolean = false;
 		private var rewardRewards : Boolean = false;
 		private var rewardRewardsCount : int = 0;
 		
 		private var landscape : Boolean = false;
 		private var varsSet : Boolean = false;
-		
+		private var isClicked: Boolean = false;
 		
 		public function Main()
 		{
@@ -90,14 +62,14 @@ package
 			addEventListener(Event.DEACTIVATE,onDeactivate);
 			addEventListener(Event.EXITING, onExiting);
 			
-			
-			mbAPI.initialize(baseURL,appID,this);
-			
+			MediabrixAirAPI.instance.setDebug(false);
+			MediabrixAirAPI.instance.initialize(baseURL,appID,this);
 		}
-		//Mediabrix Callbacks
+		
 		public function onStarted(status:String):void{
 			log("onStarted");
 		}
+		
 		public function onAdReady(zone:String):void{
 			log(zone + ":onAdReady");
 			if(zone == adZoneFlex)
@@ -109,7 +81,6 @@ package
 		}
 		
 		public function onAdShown(zone:String):void{
-			
 			log(zone + ":onAdShown");
 		}
 		
@@ -124,23 +95,35 @@ package
 			}
 		}
 		
-		public function onAdShown(zone:String):void{
-			log(zone + ":onAdShown");
-		}
-		
 		public function onAdClosed(zone:String):void{
-			if(rewardViews == true && zone == adZoneViews){
-				log(zone + ":onAdClosed & Rewarded");
+			if(rewardViews == true && zone == adZoneViews && isClicked == true){
+				log(zone + ":onAdClosed & Clicked");
+				isClicked = false;
+				rewardViews = false;
+			}else if(rewardRewards == true && zone == adZoneRewards && isClicked == true){
+				log(zone + ":onAdClosed & Clicked");
+				rewardRewards = false;
+				isClicked = false;
+			}				
+			else if(rewardViews == true && zone == adZoneViews){
+				log(zone + ":onAdClosed");
 				rewardViews = false;
 			}
 			else if(rewardRewards == true && zone == adZoneRewards){
-				log(zone + ":onAdClosed & Rewarded");
+				log(zone + ":onAdClosed");
 				rewardRewards = false;
-			}				
+			}else if(isClicked == true){
+				log(zone + ":onAdClosed & Clicked");
+				isClicked = false;
+			}
 			else
 				log(zone + ":onAdClosed");
 		}
 		
+		
+		public function onAdClicked(zone:String):void{
+			isClicked = true;
+		}
 		
 		public function onAdUnavailable(zone:String):void{
 			log(zone + ":onAdUnavailable");
@@ -153,8 +136,6 @@ package
 		{
 			log(adZoneFlex + ":Loading...");
 			mbAPI.load(adZoneFlex,mbVars);
-			//this.stage.setOrientation( StageOrientation.ROTATED_RIGHT );
-			//this.stage.setOrientation( StageOrientation.DEFAULT );
 		}
 		
 		public function showFlex():void
@@ -201,16 +182,6 @@ package
 			}else{
 				log(adZoneRewards + ":Is Not Ready");
 			}
-		}
-		
-		public function testRefresh():void
-		{
-			//this.stage.redraw();
-			//this.stage.setOrientation( StageOrientation.ROTATED_RIGHT );
-			//stage.invalidate();
-			//this.stage.setAspectRatio(StageAspectRatio.LANDSCAPE);
-			
-			
 		}
 		
 		public function setVars():void{
@@ -299,7 +270,7 @@ package
 			txtHeader.y = 50
 			txtHeader.height=65;
 			
-			txtHeader.text="MediaBrix-AIR v1.8.0.019";
+			txtHeader.text="MediaBrix-AIR v1.8.0.028";
 			addChild(txtHeader);
 			
 			txtStatus=new TextField();
@@ -501,20 +472,12 @@ class Command
 	/** Label */
 	private var label:String;
 	
-	//
-	// Public Methods
-	//
-	
 	/** Create New Command */
 	public function Command(label:String,fnCallback:Function)
 	{
 		this.fnCallback=fnCallback;
 		this.label=label;
 	}
-	
-	//
-	// Command Implementation
-	//
 	
 	/** Get Label */
 	public function getLabel():String
