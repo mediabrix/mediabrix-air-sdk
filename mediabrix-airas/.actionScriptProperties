@@ -34,7 +34,7 @@
           <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/automation_agent.swc" useDefaultLinkType="false"/>
         </excludedEntries>
       </libraryPathEntry>
-      <libraryPathEntry kind="5" linkType="2" path="/Users/muhammad/Downloads/mediabrix-android-sdk-master/AIR/mediabrix.ane"/>
+      <libraryPathEntry kind="5" linkType="2" path="/Users/muhammad/Documents/mediabrix-air-sdk/mediabrix.ane"/>
     </libraryPath>
     <sourceAttachmentPath/>
   </compiler>
@@ -51,7 +51,9 @@
     <buildTarget buildTargetName="device" iosSettingsVersion="2" isCurrent="true" platformId="com.adobe.flexide.multiplatform.ios.platform" provisioningFile="/Users/muhammad/Dropbox/iOSEnterpriseProv/TeamBrix_Enterprise-.mobileprovision" releasePackageType="">
       <airSettings airCertificatePath="/Users/muhammad/Downloads/MediabrixInc.p12" airTimestamp="true" anePathSet="true" version="1">
         <airExcludes/>
-        <anePaths/>
+        <anePaths>
+          <anePathEntry path="/Users/muhammad/Documents/mediabrix-air-sdk/mediabrix.ane"/>
+        </anePaths>
         <newLaunchParams/>
         <modifiedLaunchParams/>
         <newPackagingParams/>
@@ -61,9 +63,11 @@
       <actionScriptSettings version="1"/>
     </buildTarget>
     <buildTarget airDownloadURL="" androidSettingsVersion="2" buildTargetName="device" isCurrent="true" platformId="com.adobe.flexide.multiplatform.android.platform">
-      <airSettings airCertificatePath="" airTimestamp="true" anePathSet="false" version="1">
+      <airSettings airCertificatePath="" airTimestamp="true" anePathSet="true" version="1">
         <airExcludes/>
-        <anePaths/>
+        <anePaths>
+          <anePathEntry path="/Users/muhammad/Documents/mediabrix-air-sdk/mediabrix.ane"/>
+        </anePaths>
         <newLaunchParams/>
         <modifiedLaunchParams/>
         <newPackagingParams/>
