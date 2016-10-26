@@ -1,4 +1,5 @@
 #MediaBrix Air ANE
+##Please see "Testing / Release Settings" section for new guidelines on testing and deploying your integration.
 
 ##Getting Started
 
@@ -55,30 +56,42 @@ The class in which you would like to display ads will need to implement the `IAd
 
 ###Initialization
 To initialize the MediaBrix SDK you will need to create an instance of the MediaBrixAPI object in your class' Main() method:
-````
+```
 public function Main()
 {
      super();
      MediabrixAirAPI.instance.initialize(baseURL,appID,this); //this refers to the class that is implementing IAdEventsListener	
 }
-````
+```
+
+###Testing / Release Settings
+
+To facilitate integrations and QA around the globe, MediaBrix has deployed an open Base URL for all of our world wide network partners to use while testing the MediaBrix SDK. This Test Base URL will eliminate the need for proxying your device to the US and ensure your app receives 100% fill during testing.
+
+* **Test Base URL:** `https://test-mobile.mediabrix.com/v2/manifest/`
+
+* **Production Base URL:** `https://mobile.mediabrix.com/v2/manifest/`
+
+`https://test-mobile.mediabrix.com/v2/manifest/` should **ONLY** be used for testing purposes, as it will not deliver live campaigns to your app.
+
+It is important to ensure that after testing, the Release build of your app uses the Production Base URL. **If you release your app using the Test Base URL, your app will not receive payable MediaBrix ads.**
 
 ###Load an Ad
 After receiving the `onStarted()` callback, the SDK is now ready to load ads. To load an ad call the method below:
-````
+```
 private var mbVars = new Object();
 MediabrixAirAPI.instance.load(zone,mbVars); //ZONE is a string that provided to you by MediaBrix
-````
+```
 
 ###Show an Ad
 After receiving the `onAdReady(String zone)` callback, the SDK is ready to show an ad for that zone 
-````
+```
 MediabrixAirAPI.instance.show(zone);
-````
+```
 
 ###SDK Callback Methods
 The `IAdEventsListener` interface provides several callback methods that provide information regarding the SDK ad state after initialization, loading, and showing.
-````
+```
 public function onStarted(status:String):void{
     // MediaBrix SDK has been initialized successfully, and can now attempt to load ads.
 }
@@ -107,7 +120,7 @@ public function onAdClicked(zone:String):void{
 public function onAdClosed(zone:String):void{
     // The ad that was being displayed to the user has been closed
 }
-````
+```
 
 ###Verbose Logging
 The MediaBrix SDK prints out logs to reflect what state it is in. To turn off logs printed out by the SDK use the following command:
