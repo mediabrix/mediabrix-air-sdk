@@ -14,6 +14,8 @@
 * Press "Add ANE" and locate where you saved "mediabrix.ane"
 * Press "OK"
 
+*note: If your project already uses a google play services dependecny use mediabrix_nogps.ane instead
+
 ###Android Set-Up
 Please the add following information for the Android manifest defined in your projectsname-app.xml file.
 
@@ -80,8 +82,7 @@ It is important to ensure that after testing, the Release build of your app uses
 ###Load an Ad
 After receiving the `onStarted()` callback, the SDK is now ready to load ads. To load an ad call the method below:
 ```
-private var mbVars = new Object();
-MediabrixAirAPI.instance.load(zone,mbVars); //ZONE is a string that provided to you by MediaBrix
+MediabrixAirAPI.instance.load(zone); //ZONE is a string that provided to you by MediaBrix
 ```
 
 ###Show an Ad
