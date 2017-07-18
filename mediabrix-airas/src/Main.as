@@ -26,17 +26,17 @@ package
 		private var mbVars:Object = new Object();
 		
 		private var baseURL : String = "http://mobile.mediabrix.com/v2/manifest/";
-		private var appID : String = "TwwvxoFnJn";
+		private var appID : String = "JxxEkB3BpF";
 		
-		private var adZoneFlex : String = "Babel_Rally";
+		private var adZoneFlex : String = "Rally_Standard_Video";
 		private var isReadyFlex : Boolean = false;
 		
-		private var adZoneViews : String = "Babel_Rescue";
+		private var adZoneViews : String = "Rally_Full_Image";
 		private var isReadyViews : Boolean = false;
 		private var rewardViews : Boolean = false;
 		private var rewardViewsCount : int = 0;
 		
-		private var adZoneRewards : String = "Babel_Reward";
+		private var adZoneRewards : String = "Rally_Static_Image";
 		private var isReadyRewards : Boolean = false;
 		private var rewardRewards : Boolean = false;
 		private var rewardRewardsCount : int = 0;
@@ -135,7 +135,7 @@ package
 		public function loadFlex():void
 		{
 			log(adZoneFlex + ":Loading...");
-			mbAPI.load(adZoneFlex,mbVars);
+			mbAPI.load(adZoneFlex);
 		}
 		
 		public function showFlex():void
@@ -152,7 +152,7 @@ package
 		public function loadViews():void
 		{
 			log(adZoneViews + ":Loading...");
-			mbAPI.load(adZoneViews,mbVars);
+			mbAPI.load(adZoneViews);
 		}
 		
 		public function showViews():void
@@ -169,7 +169,7 @@ package
 		public function loadRewards():void
 		{
 			log(adZoneRewards + ":Loading...");
-			mbAPI.load(adZoneRewards,mbVars);
+			mbAPI.load(adZoneRewards);
 		}
 		
 		public function showRewards():void
