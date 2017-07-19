@@ -14,7 +14,7 @@
 * Press "Add ANE" and locate where you saved "mediabrix.ane"
 * Press "OK"
 
-*note: If your project already uses a google play services dependecny use mediabrix_nogps.ane instead
+**Note: If your project already uses a google play services dependecny use mediabrix_nogps.ane instead**
 
 ### Android Set-Up
 Please the add following information for the Android manifest defined in your projectsname-app.xml file.
